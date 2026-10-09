@@ -6,20 +6,20 @@
 /*   By: dibrayev <dibrayev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/16 18:17:37 by dibrayev          #+#    #+#             */
-/*   Updated: 2026/10/09 16:46:26 by dibrayev         ###   ########.fr       */
+/*   Updated: 2026/10/09 17:13:19 by dibrayev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-void ft_type(arg, size_t *counter)
+void ft_type( va_list arg, char *input, size_t *counter)
 {
 	if (*input == '%')
 		ft_putchar('%', counter);
 	if (*input == 'c')
-		ft_putchar(arg, counter);
+		ft_putchar(va_arg(arg, int), counter);
 	if (*input == 's')
-		ft_putstr(arg, counter);
+		ft_putstr(va_arg(arg, char *), counter);
 	if (*input == 'p')
 		ft_putpntr(arg, counter);
 }
@@ -38,11 +38,10 @@ int	ft_printf(const char *input, ...)
 		else
 		{
 			input++;
-			ft_type(arg, (char *)input, &counter);
+			ft_type(arg, input, &counter);
 		}
 		input++;
 	}
 	va_end(arg);
 	return (counter);
-	
 }
