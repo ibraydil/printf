@@ -6,7 +6,7 @@
 /*   By: dibrayev <dibrayev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/16 18:17:37 by dibrayev          #+#    #+#             */
-/*   Updated: 2026/10/16 19:55:22 by dibrayev         ###   ########.fr       */
+/*   Updated: 2026/10/16 22:17:49 by dibrayev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,12 @@ void ft_type(va_list *arg, const char *input, size_t *counter)
 		ft_putpntr(va_arg(*arg, void *), counter);
 	if (*input == 'i' || *input == 'd')
 		ft_putnbr(va_arg(*arg, int), counter);
+	if (*input == 'u')
+		ft_putnbr(va_arg(*arg, unsigned int), counter);
+	if (*input == 'x')
+		ft_puthex(va_arg(*arg, unsigned int), counter, 'a');
+	if (*input == 'X')
+		ft_puthex(va_arg(*arg, unsigned int), counter, 'A');
 }
 
 int	ft_printf(const char *input, ...)
