@@ -1,57 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   print_numbers.c                                    :+:      :+:    :+:   */
+/*   print_char.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dibrayev <dibrayev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/10/13 16:14:02 by dibrayev          #+#    #+#             */
-/*   Updated: 2026/10/16 22:19:04 by dibrayev         ###   ########.fr       */
+/*   Created: 2026/10/13 16:14:57 by dibrayev          #+#    #+#             */
+/*   Updated: 2026/10/16 22:56:56 by dibrayev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-void	ft_putnbr(long n, size_t *counter)
+void	ft_putchar(char c, size_t *counter)
 {
-	long	nb;
-
-	nb = n;
-	if (nb < 0)
-	{
-		ft_putchar('-', counter);
-		nb = nb * -1;
-	}
-	if (nb <= 9)
-	{
-		ft_putchar(nb + '0', counter);
-	}
-	if (nb > 9)
-	{
-		ft_putnbr(nb / 10, counter);
-		ft_putnbr(nb % 10, counter);
-	}
+	write (1, &c, 1);
+	(*counter)++;
 }
 
-void	ft_puthex(unsigned int n, size_t *counter, char start)
+void	ft_putstr(char *c, size_t *counter)
 {
-	int i;
+	int	i;
+	i = 0;
 
-	if (n < 16)
+	if (c == NULL)
 	{
-		if (n <= 9)
-			ft_putnbr(n, counter);
-		else
-		{
-			i = start + (n % 10);
-			ft_putchar (i, counter);
-		}
+		write (1, "(null)", 6);
+		*counter += 6;
+		return ;
 	}
-	else
+	while (c[i])
 	{
-		ft_puthex(n / 16, counter, start);
-		ft_puthex(n % 16, counter, start);
+		write (1, &c[i], 1);
+		i++;
+		(*counter)++;
 	}
 }
-
-void	ft_putpntr()
